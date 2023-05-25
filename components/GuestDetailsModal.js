@@ -29,23 +29,17 @@ const GuestDetailsModal = ({ props }) => {
       footer={
         <ModalFooter>
           <ModalButton
-            text="Cancel"
-            style={{
-              margin: 20,
-              color: "#fff",
-              backgroundColor: "red",
-            }}
-            textStyle={{
-              color: "white",
-            }}
-            onPress={() => setModalVisible(false)}
-          />
-          <ModalButton
+            disabled={adults < 1 ? true : false && rooms < 1 ? true : false}
             text="Apply"
             style={{
               margin: 20,
               color: "#fff",
-              backgroundColor: "#008053",
+              backgroundColor:
+                adults < 1
+                  ? "gray"
+                  : "#008053" && rooms < 1
+                  ? "gray"
+                  : "#008053",
             }}
             textStyle={{
               color: "white",
@@ -60,9 +54,13 @@ const GuestDetailsModal = ({ props }) => {
           slideFrom: "bottom",
         })
       }
-      onHardwareBackPress={() => setModalVisible(false)}
+      onHardwareBackPress={() =>
+        setModalVisible(adults < 1 ? true : false && rooms < 1 ? true : false)
+      }
       visible={modalVisible}
-      onTouchOutside={() => setModalVisible(false)}
+      onTouchOutside={() =>
+        setModalVisible(adults < 1 ? true : false && rooms < 1 ? true : false)
+      }
     >
       <ModalContent style={{ width: "100%" }}>
         <View
@@ -73,7 +71,9 @@ const GuestDetailsModal = ({ props }) => {
           }}
         >
           {/* Rooms */}
-          <Text style={{ marginRight: 15, width: 75 }}>Rooms:</Text>
+          <Text style={{ marginRight: 15, width: 75 }}>
+            {rooms > 1 ? "Rooms:" : "Room:"}
+          </Text>
           <Pressable
             style={{
               flexDirection: "row",
@@ -148,7 +148,9 @@ const GuestDetailsModal = ({ props }) => {
             marginTop: 15,
           }}
         >
-          <Text style={{ marginRight: 15, width: 75 }}>Adults:</Text>
+          <Text style={{ marginRight: 15, width: 75 }}>
+            {adults > 1 ? "Adults:" : "Adult:"}
+          </Text>
           <Pressable
             style={{
               flexDirection: "row",
@@ -223,7 +225,9 @@ const GuestDetailsModal = ({ props }) => {
             marginTop: 15,
           }}
         >
-          <Text style={{ marginRight: 15, width: 75 }}>Childrens: </Text>
+          <Text style={{ marginRight: 15, width: 75 }}>
+            {children > 1 ? "Childrens:" : "Children:"}{" "}
+          </Text>
           <Pressable
             style={{
               flexDirection: "row",

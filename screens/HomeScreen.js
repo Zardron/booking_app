@@ -76,7 +76,7 @@ const HomeScreen = () => {
           <View
             style={{
               margin: 20,
-              borderColor: "#008053",
+              borderColor: "black",
               borderWidth: 3,
               borderRadius: 6,
             }}
@@ -88,7 +88,7 @@ const HomeScreen = () => {
                 alignItems: "center",
                 gap: 10,
                 paddingHorizontal: 10,
-                borderColor: "#008053",
+                borderColor: "black",
                 borderWidth: 2,
                 paddingVertical: 10,
               }}
@@ -107,7 +107,7 @@ const HomeScreen = () => {
                 alignItems: "center",
                 gap: 10,
                 paddingHorizontal: 10,
-                borderColor: "#008053",
+                borderColor: "black",
                 borderWidth: 2,
                 paddingVertical: 10,
               }}
@@ -115,7 +115,7 @@ const HomeScreen = () => {
               <Feather name="calendar" size={24} color="black" />
               <DatePicker
                 style={{
-                  width: 350,
+                  width: "100%",
                   height: 30,
                   borderRadius: 0,
                   borderWidth: 0,
@@ -160,9 +160,10 @@ const HomeScreen = () => {
                 alignItems: "center",
                 gap: 10,
                 paddingHorizontal: 10,
-                borderColor: "#008053",
+                borderColor: "black",
                 borderWidth: 2,
                 paddingVertical: 10,
+                width: "100%",
               }}
             >
               <Ionicons name="person-outline" size={24} color="black" />
@@ -183,7 +184,7 @@ const HomeScreen = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 paddingHorizontal: 10,
-                borderColor: "#008053",
+                borderColor: "black",
                 borderWidth: 2,
                 paddingVertical: 10,
                 backgroundColor: "#008053",
