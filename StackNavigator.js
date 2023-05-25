@@ -10,6 +10,7 @@ import BookingScreen from "./screens/BookingScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import ProfileScreen from "./screens/ProfileScreen";
+import SearchScreen from "./screens/SearchScreen";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -23,10 +24,12 @@ const StackNavigator = () => {
           component={HomeScreen}
           options={{
             tabBarLabel: "Home",
+            tabBarActiveTintColor: "#008053",
+            tabBarInactiveTintColor: "black",
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Entypo name="home" size={24} color="#003580" />
+                <Entypo name="home" size={24} color="#008053" />
               ) : (
                 <AntDesign name="home" size={24} color="black" />
               ),
@@ -38,10 +41,12 @@ const StackNavigator = () => {
           component={SavedScreen}
           options={{
             tabBarLabel: "Saved",
+            tabBarActiveTintColor: "#008053",
+            tabBarInactiveTintColor: "black",
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <AntDesign name="heart" size={24} color="#003580" />
+                <AntDesign name="heart" size={24} color="#008053" />
               ) : (
                 <AntDesign name="hearto" size={24} color="black" />
               ),
@@ -53,10 +58,12 @@ const StackNavigator = () => {
           component={BookingScreen}
           options={{
             tabBarLabel: "Bookings",
+            tabBarActiveTintColor: "#008053",
+            tabBarInactiveTintColor: "black",
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Ionicons name="notifications" size={24} color="#003580" />
+                <Ionicons name="notifications" size={24} color="#008053" />
               ) : (
                 <Ionicons
                   name="notifications-outline"
@@ -72,10 +79,12 @@ const StackNavigator = () => {
           component={ProfileScreen}
           options={{
             tabBarLabel: "Profile",
+            tabBarActiveTintColor: "#008053",
+            tabBarInactiveTintColor: "black",
             headerShown: false,
             tabBarIcon: ({ focused }) =>
               focused ? (
-                <Ionicons name="person" size={24} color="#003580" />
+                <Ionicons name="person" size={24} color="#008053" />
               ) : (
                 <Ionicons name="person-outline" size={24} color="black" />
               ),
@@ -102,11 +111,11 @@ const StackNavigator = () => {
           component={BottomTabs}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Search"
           component={SearchScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
         {/* <Stack.Screen name="Places" component={PlacesScreen} /> */}
         {/* <Stack.Screen
           name="Map"

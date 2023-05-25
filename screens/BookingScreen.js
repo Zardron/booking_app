@@ -3,7 +3,7 @@ import React from "react";
 
 const BookingScreen = () => {
   return (
-    <View style={{ backgroundColor: "#008053" }}>
+    <View>
       <Text>BookingScreen</Text>
     </View>
   );

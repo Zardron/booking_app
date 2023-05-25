@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   Button,
   Pressable,
-  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -15,6 +14,7 @@ import { Feather } from "@expo/vector-icons";
 import Header from "../components/Header";
 import DatePicker from "react-native-date-ranges";
 import GuestDetailsModal from "../components/GuestDetailsModal";
+import Announcement from "../components/Announcement";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -72,135 +72,134 @@ const HomeScreen = () => {
       <View>
         <Header />
 
-        <ScrollView>
-          <View
+        <View
+          style={{
+            margin: 20,
+            borderColor: "black",
+            borderWidth: 3,
+            borderRadius: 6,
+          }}
+        >
+          {/* Destination */}
+          <Pressable
+            onPress={() => navigation.navigate("Search")}
             style={{
-              margin: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              paddingHorizontal: 10,
               borderColor: "black",
-              borderWidth: 3,
-              borderRadius: 6,
+              borderWidth: 2,
+              paddingVertical: 10,
             }}
           >
-            {/* Destination */}
-            <Pressable
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
-                paddingHorizontal: 10,
-                borderColor: "black",
-                borderWidth: 2,
-                paddingVertical: 10,
-              }}
-            >
-              <AntDesign name="search1" size={24} color="black" />
-              <TextInput
-                placeholder="Enter your Destination"
-                style={{ width: "100%" }}
-              />
-            </Pressable>
+            <AntDesign name="search1" size={24} color="black" />
+            <TextInput
+              onPress={() => navigation.navigate("Search")}
+              placeholder="Enter your Destination"
+              style={{ width: "100%" }}
+            />
+          </Pressable>
 
-            {/* Select Dates */}
-            <Pressable
+          {/* Select Dates */}
+          <Pressable
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              paddingHorizontal: 10,
+              borderColor: "black",
+              borderWidth: 2,
+              paddingVertical: 10,
+            }}
+          >
+            <Feather name="calendar" size={24} color="black" />
+            <DatePicker
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
-                paddingHorizontal: 10,
-                borderColor: "black",
-                borderWidth: 2,
-                paddingVertical: 10,
-              }}
-            >
-              <Feather name="calendar" size={24} color="black" />
-              <DatePicker
-                style={{
-                  width: "100%",
-                  height: 30,
-                  borderRadius: 0,
-                  borderWidth: 0,
-                  borderColor: "transparent",
-                }}
-                customStyles={{
-                  placeholderText: {
-                    fontSize: 15,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginRight: "auto",
-                  },
-                  headerStyle: {
-                    backgroundColor: "#008053",
-                  },
-                  contentText: {
-                    fontSize: 15,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginRight: "auto",
-                  },
-                }}
-                selectedBgColor="#008053"
-                customButton={(onConfirm) => customButton(onConfirm)}
-                onConfirm={(startDate, endDate) =>
-                  setSelectedDates(startDate, endDate)
-                }
-                allowFontScaling={false}
-                placeholder={"Select your Dates"}
-                mode={"range"}
-                markText={" "}
-                dateSplitter=" > "
-                blockBefore={true}
-              />
-            </Pressable>
-
-            {/* Rooms and Guests */}
-            <Pressable
-              onPress={() => setModalVisible(true)}
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
-                paddingHorizontal: 10,
-                borderColor: "black",
-                borderWidth: 2,
-                paddingVertical: 10,
                 width: "100%",
+                height: 30,
+                borderRadius: 0,
+                borderWidth: 0,
+                borderColor: "transparent",
               }}
-            >
-              <Ionicons name="person-outline" size={24} color="black" />
-              <Text
-                onPress={() => setModalVisible(true)}
-                style={{ color: "red" }}
-              >
-                {rooms} {rooms > 1 ? "rooms" : "room"} • {adults}{" "}
-                {adults > 1 ? "adults" : "adult"} • {children}{" "}
-                {children > 1 ? "childrens" : "children"}
-              </Text>
-            </Pressable>
+              customStyles={{
+                placeholderText: {
+                  fontSize: 15,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginRight: "auto",
+                },
+                headerStyle: {
+                  backgroundColor: "#008053",
+                },
+                contentText: {
+                  fontSize: 15,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginRight: "auto",
+                },
+              }}
+              selectedBgColor="#008053"
+              customButton={(onConfirm) => customButton(onConfirm)}
+              onConfirm={(startDate, endDate) =>
+                setSelectedDates(startDate, endDate)
+              }
+              allowFontScaling={false}
+              placeholder={"Select your Dates"}
+              mode={"range"}
+              markText={" "}
+              dateSplitter=" > "
+              blockBefore={true}
+            />
+          </Pressable>
 
-            {/* Search Button */}
-            <Pressable
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                paddingHorizontal: 10,
-                borderColor: "black",
-                borderWidth: 2,
-                paddingVertical: 10,
-                backgroundColor: "#008053",
-              }}
+          {/* Rooms and Guests */}
+          <Pressable
+            onPress={() => setModalVisible(true)}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              paddingHorizontal: 10,
+              borderColor: "black",
+              borderWidth: 2,
+              paddingVertical: 10,
+              width: "100%",
+            }}
+          >
+            <Ionicons name="person-outline" size={24} color="black" />
+            <Text
+              onPress={() => setModalVisible(true)}
+              style={{ color: "red" }}
             >
-              <AntDesign name="search1" size={24} color="white" />
-              <Text
-                style={{ color: "white", marginLeft: 5, fontWeight: "bold" }}
-              >
-                Search
-              </Text>
-            </Pressable>
-          </View>
-        </ScrollView>
+              {rooms} {rooms > 1 ? "rooms" : "room"} • {adults}{" "}
+              {adults > 1 ? "adults" : "adult"} • {children}{" "}
+              {children > 1 ? "childrens" : "children"}
+            </Text>
+          </Pressable>
+
+          {/* Search Button */}
+          <Pressable
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              paddingHorizontal: 10,
+              borderColor: "black",
+              borderWidth: 2,
+              paddingVertical: 10,
+              backgroundColor: "#008053",
+            }}
+          >
+            <AntDesign name="search1" size={24} color="white" />
+            <Text style={{ color: "white", marginLeft: 5, fontWeight: "bold" }}>
+              Search
+            </Text>
+          </Pressable>
+        </View>
       </View>
 
+      <Announcement />
       <GuestDetailsModal props={modalProps} />
     </>
   );
