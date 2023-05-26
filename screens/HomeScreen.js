@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   Button,
   Pressable,
@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -19,6 +20,7 @@ import Announcement from "../components/Announcement";
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [selectedDates, setSelectedDates] = useState();
+  const route = useRoute();
   const [rooms, setRooms] = useState(1);
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
@@ -67,6 +69,34 @@ const HomeScreen = () => {
     setModalVisible,
   ];
 
+  const searchPlaces = (place) => {
+    if (!route.params || !selectedDates) {
+      Alert.alert(
+        "Invalid Details",
+        "Please enter all the details",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel",
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") },
+        ],
+        { cancelable: false }
+      );
+    }
+
+    if (route.params && selectedDates) {
+      navigation.navigate("Places", {
+        rooms: rooms,
+        adults: adults,
+        children: children,
+        selectedDates: selectedDates,
+        place: place,
+      });
+    }
+  };
+
   return (
     <>
       <View>
@@ -98,6 +128,7 @@ const HomeScreen = () => {
               onPress={() => navigation.navigate("Search")}
               placeholder="Enter your Destination"
               style={{ width: "100%" }}
+              value={route?.params && route.params.input}
             />
           </Pressable>
 
@@ -180,6 +211,7 @@ const HomeScreen = () => {
 
           {/* Search Button */}
           <Pressable
+            onPress={() => searchPlaces(route?.params.input)}
             style={{
               flexDirection: "row",
               alignItems: "center",

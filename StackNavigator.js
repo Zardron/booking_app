@@ -11,6 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
+import PlacesScreen from "./screens/PlacesScreen";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -116,7 +117,7 @@ const StackNavigator = () => {
           component={SearchScreen}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen name="Places" component={PlacesScreen} /> */}
+        <Stack.Screen name="Places" component={PlacesScreen} />
         {/* <Stack.Screen
           name="Map"
           component={MapScreen}
