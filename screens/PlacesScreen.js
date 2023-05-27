@@ -11,7 +11,7 @@ import PopularPlacesModal from "../components/PopularPlacesModal";
 const PlacesScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState([]);
 
   useLayoutEffect(() => {
@@ -43,6 +43,11 @@ const PlacesScreen = () => {
     },
   ];
 
+  const searchPlaces = DestinationData?.filter(
+    (item) => item.place === route.params.place
+  );
+  const [sortedData, setSortedData] = useState(DestinationData);
+
   return (
     <View>
       <Pressable
@@ -56,13 +61,22 @@ const PlacesScreen = () => {
         }}
       >
         <Pressable
+          onPress={() => setModalVisible(true)}
           style={{
             flexDirection: "row",
             alignItems: "center",
           }}
         >
-          <Octicons name="arrow-switch" size={22} color="gray" />
-          <Text style={{ marginLeft: 6, fontSize: 15, fontWeight: "500" }}>
+          <Octicons
+            name="arrow-switch"
+            size={22}
+            color="gray"
+            onPress={() => setModalVisible(true)}
+          />
+          <Text
+            style={{ marginLeft: 6, fontSize: 15, fontWeight: "500" }}
+            onPress={() => setModalVisible(true)}
+          >
             Sort
           </Text>
         </Pressable>
@@ -80,6 +94,7 @@ const PlacesScreen = () => {
         </Pressable>
 
         <Pressable
+          onPress={() => navigation.navigate("Map")}
           style={{
             flexDirection: "row",
             alignItems: "center",
@@ -94,21 +109,22 @@ const PlacesScreen = () => {
 
       <ScrollView style={{ backgroundColor: "#F5F5F5", marginBottom: 50 }}>
         <View style={{ marginLeft: 6, fontSize: 15, fontWeight: "500" }}>
-          {DestinationData?.filter(
-            (item) => item.place === route.params.place
-          ).map((item) =>
-            item.properties.map((property, index) => (
-              <PropertyCard
-                key={index}
-                rooms={route.params.rooms}
-                adults={route.params.adults}
-                children={route.paramschildren}
-                selectedDates={route.params.selectedDates}
-                property={property}
-                availableRooms={property.rooms}
-              />
-            ))
-          )}
+          {sortedData
+            ?.filter((item) => item.place === route.params.place)
+            .map((item) =>
+              item.properties.map((property, index) => (
+                <PropertyCard
+                  key={index}
+                  rooms={route.params.rooms}
+                  adults={route.params.adults}
+                  children={route.paramschildren}
+                  selectedDates={route.params.selectedDates}
+                  property={property}
+                  availableRooms={property.rooms}
+                  searchPlaces={searchPlaces}
+                />
+              ))
+            )}
         </View>
       </ScrollView>
 
@@ -118,6 +134,8 @@ const PlacesScreen = () => {
         filters={filters}
         selectedFilter={selectedFilter}
         setSelectedFilter={setSelectedFilter}
+        searchPlaces={searchPlaces}
+        setSortedData={setSortedData}
       />
     </View>
   );

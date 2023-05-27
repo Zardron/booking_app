@@ -1,6 +1,6 @@
 import { View, Text, Pressable, Dimensions } from "react-native";
 import React from "react";
-import Modal, {
+import BottomModal, {
   ModalButton,
   ModalContent,
   ModalFooter,
@@ -8,7 +8,6 @@ import Modal, {
   SlideAnimation,
 } from "react-native-modals";
 import { FontAwesome } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 const PopularPlacesModal = ({
   modalVisible,
@@ -16,16 +15,55 @@ const PopularPlacesModal = ({
   filters,
   selectedFilter,
   setSelectedFilter,
+  searchPlaces,
+  setSortedData,
 }) => {
   const { width, height } = Dimensions.get("window");
+
+  const highToLow = (a, b) => {
+    if (a.newPrice > b.newPrice) {
+      return -1;
+    }
+    if (a.newPrice < b.newPrice) {
+      return 1;
+    }
+    return 0;
+  };
+  const lowToHigh = (a, b) => {
+    if (a.newPrice < b.newPrice) {
+      return -1;
+    }
+    if (a.newPrice > b.newPrice) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const applyFilter = (filter) => {
+    setModalVisible(false);
+    switch (filter) {
+      case "Price: High - Low":
+        searchPlaces.map((val) => val.properties.sort(highToLow));
+        setSortedData(searchPlaces);
+        break;
+      case "Price: Low - High":
+        searchPlaces.map((val) => val.properties.sort(lowToHigh));
+        setSortedData(searchPlaces);
+        break;
+      default:
+        setModalVisible(false);
+    }
+  };
+
   return (
-    <Modal
+    <BottomModal
       swipeThreshold={200}
       onBackdropPress={() => setModalVisible(false)}
       swipeDirection={["up", "down"]}
       footer={
         <ModalFooter>
           <ModalButton
+            onPress={() => applyFilter(selectedFilter)}
             text="Apply"
             style={{
               margin: 20,
@@ -35,7 +73,6 @@ const PopularPlacesModal = ({
             textStyle={{
               color: "white",
             }}
-            onPress={() => setModalVisible(false)}
           />
         </ModalFooter>
       }
@@ -46,16 +83,16 @@ const PopularPlacesModal = ({
         })
       }
       onHardwareBackPress={() => setModalVisible(false)}
-      visible={true}
+      visible={modalVisible}
       onTouchOutside={() => setModalVisible(false)}
     >
-      <ModalContent style={{ width: width / 1.2, height: 280 }}>
+      <ModalContent style={{ width: width / 1.2, height: 250 }}>
         <View style={{ flexDirection: "row" }}>
           <View
             style={{
               marginVertical: 10,
               flex: 2,
-              height: 280,
+              height: 230,
               borderRightWidth: 1,
               borderColor: "#E0E0E0",
             }}
@@ -75,9 +112,9 @@ const PopularPlacesModal = ({
                 key={index}
               >
                 {selectedFilter.includes(item.filter) ? (
-                  <FontAwesome5 name="dot-circle" size={21} color="green" />
+                  <FontAwesome name="circle" size={24} color="green" />
                 ) : (
-                  <FontAwesome name="circle-o" size={23} color="black" />
+                  <FontAwesome name="circle-o" size={24} color="black" />
                 )}
 
                 <Text
@@ -90,7 +127,7 @@ const PopularPlacesModal = ({
           </View>
         </View>
       </ModalContent>
-    </Modal>
+    </BottomModal>
   );
 };
 

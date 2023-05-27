@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
@@ -12,6 +12,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import ProfileScreen from "./screens/ProfileScreen";
 import SearchScreen from "./screens/SearchScreen";
 import PlacesScreen from "./screens/PlacesScreen";
+import MapScreen from "./screens/MapScreen";
 
 const StackNavigator = () => {
   const Tab = createBottomTabNavigator();
@@ -118,11 +119,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Places" component={PlacesScreen} />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Map"
           component={MapScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

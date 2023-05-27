@@ -4,6 +4,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const PropertyCard = ({
+  searchPlaces,
   rooms,
   adults,
   children,
@@ -13,7 +14,6 @@ const PropertyCard = ({
 }) => {
   const { width, height } = Dimensions.get("window");
 
-  console.log(property);
   return (
     <View>
       <Pressable
